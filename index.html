@@ -13,13 +13,13 @@
     }
 
     function onMIDIMessage(midi){
-      var i = $('.i').val();
-      var o = $('.o').val();
-
-      if(this.name == i){
+      var iSelect = $('.i').val();
+      var oSelect = $('.o').val();
+      
+      if(this.name == iSelect){
         for (var o of midiAccess.outputs.values()){
-          if( o.name == i ){
-            console.log('kick it on');
+          if( o.name == oSelect ){
+            console.log(iSelect,'to',o.name);
             o.send([144,midi.data[1],127]);
           }
         }
