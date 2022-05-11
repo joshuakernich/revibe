@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ReVibe</title>
+  <script type="text/javascript" src='jq.js'></script>
+  <script type="text/javascript">
+
+    var midiAccess;
+
+    navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
+    function onMIDIFailure(midiAccess) {
+
+    }
+
+    function onMIDIMessage(midi){
+      var i = $('.i').val();
+      var o = $('.o').val();
+
+      if(this.name == i){
+        for (var o of midiAccess.outputs.values()){
+          if( o.name == i ){
+            console.log('kick it on');
+            o.send([144,midi.data[1],127]);
+          }
+        }
+      }
+    }
+
+    function onMIDISuccess(ma) {
+      midiAccess = ma;
+      for (var o of midiAccess.outputs.values()){
+       $('<option>').appendTo('.o').text(o.name);
+      }
+
+      for (var i of midiAccess.inputs.values()){
+        $('<option>').appendTo('.i').text(i.name);
+        i.onmidimessage = onMIDIMessage;
+      }
+    }
+  </script>
+</head>
+<body>
+  From
+  <select class="i"></select>
+  to
+  <select class="o"></select>
+</body>
+</html>
