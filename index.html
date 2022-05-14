@@ -23,7 +23,7 @@
           if( o.name == oSelect ){
             
 
-            if(midi.data[0] == 128 && toggles.indexof(midi.data[1]) > -1 ){
+            if(midi.data[0] == 128 && toggles.indexOf(midi.data[1]) > -1 ){
               o.send([144,midi.data[1],127]);
               console.log('toggle',midi.data[1],iSelect,'to',o.name);
             } else if(midi.data[0] == 144){
