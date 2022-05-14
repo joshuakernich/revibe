@@ -19,7 +19,7 @@
       if(this.name == iSelect){
         for (var o of midiAccess.outputs.values()){
           if( o.name == oSelect ){
-            console.log(iSelect,'to',o.name);
+            console.log(midi.data,iSelect,'to',o.name);
             o.send([144,midi.data[1],127]);
           }
         }
